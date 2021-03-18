@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs')
-const notesData = JSON.parse(fs.readFileSync('./db/db.json' , 'utf8'));
+const notesData = JSON.parse(fs.readFile('./db/db.json' , 'utf8'));
 
 
 const app = express();
