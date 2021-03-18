@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-
+app.use(express.static('public'));
 
 
 
@@ -27,8 +27,14 @@ app.get('/api/notes', (req, res) => {
 });
 
 app.post('/api/notes', (req, res) => {
-  notes.push(newNote)
-  res.json(newNote);
+  const newNote = req.body;
+  notesData.push(newNote);
+  newNote.id = uuid.v4()
+  fs.writeFileSync('./db/db.json', JSON.stringify(notesData) ,(err) => {
+    if (err) return console.log(err);
+    res.json(newNote);
+  })
+ 
 });
 
 
